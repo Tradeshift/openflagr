@@ -80,8 +80,9 @@ var NewKafkaRecorder = func() DataRecorder {
 	}
 
 	return &kafkaRecorder{
-		topic:    config.Config.RecorderKafkaTopic,
-		producer: producer,
+		topic:               config.Config.RecorderKafkaTopic,
+		partitionKeyEnabled: config.Config.RecorderKafkaPartitionKeyEnabled,
+		producer:            producer,
 		options: DataRecordFrameOptions{
 			Encrypted:       config.Config.RecorderKafkaEncrypted,
 			Encryptor:       encryptor,
@@ -91,23 +92,14 @@ var NewKafkaRecorder = func() DataRecorder {
 }
 
 func createTLSConfiguration(certFile string, keyFile string, caFile string, verifySSL bool, simpleSSL bool) (t *tls.Config) {
-	if certFile != "" && keyFile != "" && caFile != "" {
+	if certFile != "" && keyFile != "" {
 		cert, err := tls.LoadX509KeyPair(certFile, keyFile)
 		if err != nil {
 			logrus.WithField("TLSConfigurationError", err).Panic(err)
 		}
 
-		caCert, err := os.ReadFile(caFile)
-		if err != nil {
-			logrus.WithField("TLSConfigurationError", err).Panic(err)
-		}
-
-		caCertPool := x509.NewCertPool()
-		caCertPool.AppendCertsFromPEM(caCert)
-
 		t = &tls.Config{
 			Certificates:       []tls.Certificate{cert},
-			RootCAs:            caCertPool,
 			InsecureSkipVerify: !verifySSL,
 		}
 	}
@@ -117,14 +109,26 @@ func createTLSConfiguration(certFile string, keyFile string, caFile string, veri
 			InsecureSkipVerify: !verifySSL,
 		}
 	}
+
+	if caFile != "" && t != nil {
+		caCert, err := os.ReadFile(caFile)
+		if err != nil {
+			logrus.WithField("TLSConfigurationError", err).Panic(err)
+		}
+
+		caCertPool := x509.NewCertPool()
+		caCertPool.AppendCertsFromPEM(caCert)
+		t.RootCAs = caCertPool
+	}
 	// will be nil by default if nothing is provided
 	return t
 }
 
 type kafkaRecorder struct {
-	producer sarama.AsyncProducer
-	topic    string
-	options  DataRecordFrameOptions
+	producer            sarama.AsyncProducer
+	topic               string
+	options             DataRecordFrameOptions
+	partitionKeyEnabled bool
 }
 
 func (k *kafkaRecorder) NewDataRecordFrame(r models.EvalResult) DataRecordFrame {
@@ -141,9 +145,13 @@ func (k *kafkaRecorder) AsyncRecord(r models.EvalResult) {
 		logrus.WithField("err", err).Error("failed to generate data record frame for kafka recorder")
 		return
 	}
+	var partitionKey sarama.Encoder = nil
+	if k.partitionKeyEnabled {
+		partitionKey = sarama.StringEncoder(frame.GetPartitionKey())
+	}
 	k.producer.Input() <- &sarama.ProducerMessage{
 		Topic:     k.topic,
-		Key:       sarama.StringEncoder(frame.GetPartitionKey()),
+		Key:       partitionKey,
 		Value:     sarama.ByteEncoder(output),
 		Timestamp: time.Now().UTC(),
 	}

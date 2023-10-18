@@ -128,25 +128,26 @@ var Config = struct {
 	RecorderFrameOutputMode string `env:"FLAGR_RECORDER_FRAME_OUTPUT_MODE" envDefault:"payload_string"`
 
 	// Kafka related configurations for data records logging (Flagr Metrics)
-	RecorderKafkaVersion          string        `env:"FLAGR_RECORDER_KAFKA_VERSION" envDefault:"0.8.2.0"`
-	RecorderKafkaBrokers          string        `env:"FLAGR_RECORDER_KAFKA_BROKERS" envDefault:":9092"`
-	RecorderKafkaCompressionCodec int8          `env:"FLAGR_RECORDER_KAFKA_COMPRESSION_CODEC" envDefault:"0"`
-	RecorderKafkaCertFile         string        `env:"FLAGR_RECORDER_KAFKA_CERTFILE" envDefault:""`
-	RecorderKafkaKeyFile          string        `env:"FLAGR_RECORDER_KAFKA_KEYFILE" envDefault:""`
-	RecorderKafkaCAFile           string        `env:"FLAGR_RECORDER_KAFKA_CAFILE" envDefault:""`
-	RecorderKafkaVerifySSL        bool          `env:"FLAGR_RECORDER_KAFKA_VERIFYSSL" envDefault:"false"`
-	RecorderKafkaSimpleSSL        bool          `env:"FLAGR_RECORDER_KAFKA_SIMPLE_SSL" envDefault:"false"`
-	RecorderKafkaSASLUsername     string        `env:"FLAGR_RECORDER_KAFKA_SASL_USERNAME" envDefault:""`
-	RecorderKafkaSASLPassword     string        `env:"FLAGR_RECORDER_KAFKA_SASL_PASSWORD" envDefault:""`
-	RecorderKafkaVerbose          bool          `env:"FLAGR_RECORDER_KAFKA_VERBOSE" envDefault:"true"`
-	RecorderKafkaTopic            string        `env:"FLAGR_RECORDER_KAFKA_TOPIC" envDefault:"flagr-records"`
-	RecorderKafkaRetryMax         int           `env:"FLAGR_RECORDER_KAFKA_RETRYMAX" envDefault:"5"`
-	RecorderKafkaMaxOpenReqs      int           `env:"FLAGR_RECORDER_KAFKA_MAXOPENREQUESTS" envDefault:"5"`
-	RecorderKafkaRequiredAcks     int           `env:"FLAGR_RECORDER_KAFKA_REQUIRED_ACKS" envDefault:"1"` // 0: no response, 1: wait for local, -1: wait for all
-	RecorderKafkaIdempotent       bool          `env:"FLAGR_RECORDER_KAFKA_IDEMPOTENT" envDefault:"false"`
-	RecorderKafkaFlushFrequency   time.Duration `env:"FLAGR_RECORDER_KAFKA_FLUSHFREQUENCY" envDefault:"500ms"`
-	RecorderKafkaEncrypted        bool          `env:"FLAGR_RECORDER_KAFKA_ENCRYPTED" envDefault:"false"`
-	RecorderKafkaEncryptionKey    string        `env:"FLAGR_RECORDER_KAFKA_ENCRYPTION_KEY" envDefault:""`
+	RecorderKafkaVersion             string        `env:"FLAGR_RECORDER_KAFKA_VERSION" envDefault:"0.8.2.0"`
+	RecorderKafkaBrokers             string        `env:"FLAGR_RECORDER_KAFKA_BROKERS" envDefault:":9092"`
+	RecorderKafkaCompressionCodec    int8          `env:"FLAGR_RECORDER_KAFKA_COMPRESSION_CODEC" envDefault:"0"`
+	RecorderKafkaCertFile            string        `env:"FLAGR_RECORDER_KAFKA_CERTFILE" envDefault:""`
+	RecorderKafkaKeyFile             string        `env:"FLAGR_RECORDER_KAFKA_KEYFILE" envDefault:""`
+	RecorderKafkaCAFile              string        `env:"FLAGR_RECORDER_KAFKA_CAFILE" envDefault:""`
+	RecorderKafkaVerifySSL           bool          `env:"FLAGR_RECORDER_KAFKA_VERIFYSSL" envDefault:"false"`
+	RecorderKafkaSimpleSSL           bool          `env:"FLAGR_RECORDER_KAFKA_SIMPLE_SSL" envDefault:"false"`
+	RecorderKafkaSASLUsername        string        `env:"FLAGR_RECORDER_KAFKA_SASL_USERNAME" envDefault:""`
+	RecorderKafkaSASLPassword        string        `env:"FLAGR_RECORDER_KAFKA_SASL_PASSWORD" envDefault:""`
+	RecorderKafkaVerbose             bool          `env:"FLAGR_RECORDER_KAFKA_VERBOSE" envDefault:"true"`
+	RecorderKafkaTopic               string        `env:"FLAGR_RECORDER_KAFKA_TOPIC" envDefault:"flagr-records"`
+	RecorderKafkaPartitionKeyEnabled bool          `env:"FLAGR_RECORDER_KAFKA_PARTITION_KEY_ENABLED" envDefault:"true"`
+	RecorderKafkaRetryMax            int           `env:"FLAGR_RECORDER_KAFKA_RETRYMAX" envDefault:"5"`
+	RecorderKafkaMaxOpenReqs         int           `env:"FLAGR_RECORDER_KAFKA_MAXOPENREQUESTS" envDefault:"5"`
+	RecorderKafkaRequiredAcks        int           `env:"FLAGR_RECORDER_KAFKA_REQUIRED_ACKS" envDefault:"1"` // 0: no response, 1: wait for local, -1: wait for all
+	RecorderKafkaIdempotent          bool          `env:"FLAGR_RECORDER_KAFKA_IDEMPOTENT" envDefault:"false"`
+	RecorderKafkaFlushFrequency      time.Duration `env:"FLAGR_RECORDER_KAFKA_FLUSHFREQUENCY" envDefault:"500ms"`
+	RecorderKafkaEncrypted           bool          `env:"FLAGR_RECORDER_KAFKA_ENCRYPTED" envDefault:"false"`
+	RecorderKafkaEncryptionKey       string        `env:"FLAGR_RECORDER_KAFKA_ENCRYPTION_KEY" envDefault:""`
 
 	// Kinesis related configurations for data records logging (Flagr Metrics)
 	RecorderKinesisStreamName          string        `env:"FLAGR_RECORDER_KINESIS_STREAM_NAME" envDefault:"flagr-records"`
@@ -205,6 +206,12 @@ var Config = struct {
 	HeaderAuthUserField string `env:"FLAGR_HEADER_AUTH_USER_FIELD" envDefault:"X-Email"`
 	// For those situations where ALB is in front of Flagr. Enabling this will parse x-amzn-oidc-data header.
 	HeaderAuthUserFieldAwsAlb bool `env:"FLAGR_HEADER_AUTH_USER_FIELD_AWS_ALB" envDefault:"false"`
+
+	// Identify users through cookies
+	// E.g. via cloudflare zero trust, we derive the user email from the JWT token stored in the cookie of CF_Authorization
+	CookieAuthEnabled           bool   `env:"FLAGR_COOKIE_AUTH_ENABLED" envDefault:"false"`
+	CookieAuthUserField         string `env:"FLAGR_COOKIE_AUTH_USER_FIELD" envDefault:"CF_Authorization"`
+	CookieAuthUserFieldJWTClaim string `env:"FLAGR_COOKIE_AUTH_USER_FIELD_JWT_CLAIM" envDefault:"email"`
 
 	// Authenticate with basic auth
 	BasicAuthEnabled              bool     `env:"FLAGR_BASIC_AUTH_ENABLED" envDefault:"false"`
