@@ -4,7 +4,7 @@ info:
     Flagr is a feature flagging, A/B testing and dynamic configuration
     microservice. The base path for all the APIs is "/api/v1".
   title: Flagr
-  version: 1.1.15
+  version: 1.1.16
 tags:
   - name: flag
     description: Everything about the flag
@@ -790,6 +790,25 @@ paths:
           type: integer
           format: int64
           minimum: 1
+        - in: query
+          name: limit
+          type: integer
+          format: int64
+          description: the number of snapshots to return
+        - in: query
+          name: offset
+          type: integer
+          format: int64
+          description: >-
+            return snapshots given the offset, it should usually set together
+            with limit
+        - in: query
+          name: sort
+          type: string
+          enum:
+            - ASC
+            - DESC
+          description: sort order
       responses:
         '200':
           description: returns the flag snapshots
@@ -1063,6 +1082,7 @@ definitions:
         type: integer
         format: int64
         minimum: 1
+        readOnly: true
       updatedBy:
         type: string
       flag:

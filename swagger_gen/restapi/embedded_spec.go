@@ -31,7 +31,7 @@ func init() {
   "info": {
     "description": "Flagr is a feature flagging, A/B testing and dynamic configuration microservice. The base path for all the APIs is \"/api/v1\".\n",
     "title": "Flagr",
-    "version": "1.1.15"
+    "version": "1.1.16"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -993,6 +993,30 @@ func init() {
             "name": "flagID",
             "in": "path",
             "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "the number of snapshots to return",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "return snapshots given the offset, it should usually set together with limit",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "type": "string",
+            "description": "sort order",
+            "name": "sort",
+            "in": "query"
           }
         ],
         "responses": {
@@ -1799,7 +1823,8 @@ func init() {
         "id": {
           "type": "integer",
           "format": "int64",
-          "minimum": 1
+          "minimum": 1,
+          "readOnly": true
         },
         "updatedAt": {
           "type": "string",
@@ -2095,7 +2120,7 @@ func init() {
   "info": {
     "description": "Flagr is a feature flagging, A/B testing and dynamic configuration microservice. The base path for all the APIs is \"/api/v1\".\n",
     "title": "Flagr",
-    "version": "1.1.15"
+    "version": "1.1.16"
   },
   "basePath": "/api/v1",
   "paths": {
@@ -3057,6 +3082,30 @@ func init() {
             "name": "flagID",
             "in": "path",
             "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "the number of snapshots to return",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "return snapshots given the offset, it should usually set together with limit",
+            "name": "offset",
+            "in": "query"
+          },
+          {
+            "enum": [
+              "ASC",
+              "DESC"
+            ],
+            "type": "string",
+            "description": "sort order",
+            "name": "sort",
+            "in": "query"
           }
         ],
         "responses": {
@@ -3865,7 +3914,8 @@ func init() {
         "id": {
           "type": "integer",
           "format": "int64",
-          "minimum": 1
+          "minimum": 1,
+          "readOnly": true
         },
         "updatedAt": {
           "type": "string",

@@ -19,6 +19,7 @@ import (
 
 	"github.com/go-openapi/runtime/middleware"
 	"gorm.io/gorm"
+	"gorm.io/gorm/clause"
 )
 
 // CRUD is the CRUD interface
@@ -171,12 +172,30 @@ func (c *crud) GetFlag(params flag.GetFlagParams) middleware.Responder {
 }
 
 func (c *crud) GetFlagSnapshots(params flag.GetFlagSnapshotsParams) middleware.Responder {
+	tx := getDB()
 	fs := []entity.FlagSnapshot{}
-	err := getDB().
-		Order("created_at desc").
+
+	if params.Limit != nil {
+		tx = tx.Limit(int(*params.Limit))
+	}
+	if params.Offset != nil {
+		tx = tx.Offset(int(*params.Offset))
+	}
+
+	descending := true
+	if params.Sort != nil && *params.Sort == "ASC" {
+		descending = false
+	}
+
+	if err := tx.
+		Order(clause.OrderByColumn{
+			Column: clause.Column{
+				Name: "created_at",
+			},
+			Desc: descending,
+		}).
 		Where(entity.FlagSnapshot{FlagID: util.SafeUint(params.FlagID)}).
-		Find(&fs).Error
-	if err != nil {
+		Find(&fs).Error; err != nil {
 		return flag.NewGetFlagSnapshotsDefault(500).WithPayload(
 			ErrorMessage("cannot find flag snapshots for %v. %s", params.FlagID, err))
 	}
@@ -591,7 +610,7 @@ func (c *crud) PutDistributions(params distribution.PutDistributionsParams) midd
 		err1 := tx.Create(&d).Error
 		if err1 != nil {
 			tx.Rollback()
-			return distribution.NewPutDistributionsDefault(500).WithPayload(ErrorMessage("%s", err))
+			return distribution.NewPutDistributionsDefault(500).WithPayload(ErrorMessage("%s", err1))
 		}
 	}
 	err = tx.Commit().Error
