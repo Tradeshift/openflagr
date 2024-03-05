@@ -59,7 +59,7 @@ require (
 	github.com/newrelic/go-agent v2.1.0+incompatible
 	gorm.io/driver/mysql v1.4.5
 	gorm.io/driver/postgres v1.4.6
-	gorm.io/driver/sqlite v1.4.4
+	gorm.io/driver/sqlite v1.5.5
 	gorm.io/gorm v1.24.3
 )
 
