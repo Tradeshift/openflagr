@@ -5,7 +5,7 @@ go 1.21
 require (
 	cloud.google.com/go v0.108.0 // indirect
 	github.com/DataDog/datadog-go v4.8.3+incompatible
-	github.com/Shopify/sarama v1.38.0
+	github.com/Shopify/sarama v1.43.0
 	github.com/a8m/kinesis-producer v0.2.0
 	github.com/auth0/go-jwt-middleware v1.0.2-0.20210804140707-b4090e955b98
 	github.com/avast/retry-go v3.0.0+incompatible
