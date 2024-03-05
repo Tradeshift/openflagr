@@ -36,7 +36,7 @@ require (
 	github.com/philhofer/fwd v1.1.2 // indirect
 	github.com/phyber/negroni-gzip v1.0.0
 	github.com/prashantv/gostub v1.1.0
-	github.com/prometheus/client_golang v1.14.0
+	github.com/prometheus/client_golang v1.19.0
 	github.com/prometheus/client_model v0.3.0 // indirect
 	github.com/prometheus/procfs v0.9.0 // indirect
 	github.com/rs/cors v1.8.3
