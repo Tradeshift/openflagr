@@ -49,7 +49,7 @@ require (
 	github.com/zhouzhuojie/conditions v0.2.3
 	github.com/zhouzhuojie/withtimeout v0.0.0-20190405051827-12b39eb2edd5
 	golang.org/x/net v0.17.0
-	google.golang.org/api v0.107.0
+	google.golang.org/api v0.170.0
 	google.golang.org/grpc v1.53.0
 	gopkg.in/DataDog/dd-trace-go.v1 v1.46.0
 )
