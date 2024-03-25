@@ -7,7 +7,7 @@ require (
 	github.com/DataDog/datadog-go v4.8.3+incompatible
 	github.com/Shopify/sarama v1.38.0
 	github.com/a8m/kinesis-producer v0.2.0
-	github.com/auth0/go-jwt-middleware v1.0.2-0.20210804140707-b4090e955b98
+	github.com/auth0/go-jwt-middleware/v2 v2.2.1
 	github.com/avast/retry-go v3.0.0+incompatible
 	github.com/aws/aws-sdk-go v1.44.180
 	github.com/brandur/simplebox v0.0.0-20150921201729-84e9865bb03a
