@@ -21,7 +21,7 @@ services:
       MYSQL_DATABASE: "flagr"
 
   postgres13:
-    image: postgres:13
+    image: postgres:17
     container_name: flagr-postgres13
     environment:
       POSTGRES_PASSWORD: "test"
@@ -29,7 +29,7 @@ services:
       POSTGRES_DB: "flagr"
 
   postgres9:
-    image: postgres:9
+    image: postgres:17
     container_name: flagr-postgres9
     environment:
       POSTGRES_PASSWORD: "test"
