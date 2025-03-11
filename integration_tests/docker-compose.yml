@@ -21,7 +21,7 @@ services:
       MYSQL_DATABASE: "flagr"
 
   postgres13:
-    image: postgres:13
+    image: 063399264027.dkr.ecr.eu-west-1.amazonaws.com/tradeshift-base/tradeshift-postgres-alpine-13-alpine:latest
     container_name: flagr-postgres13
     environment:
       POSTGRES_PASSWORD: "test"
@@ -29,7 +29,7 @@ services:
       POSTGRES_DB: "flagr"
 
   postgres9:
-    image: postgres:9
+    image: 063399264027.dkr.ecr.eu-west-1.amazonaws.com/tradeshift-base/tradeshift-postgres-alpine-13-alpine:latest
     container_name: flagr-postgres9
     environment:
       POSTGRES_PASSWORD: "test"
