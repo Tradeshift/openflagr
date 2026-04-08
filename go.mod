@@ -29,7 +29,7 @@ require (
 	github.com/go-openapi/swag v0.22.3
 	github.com/go-openapi/validate v0.22.1
 	github.com/gohttp/pprof v0.0.0-20141119085724-c9d246cbb3ba
-	github.com/jessevdk/go-flags v1.5.0
+	github.com/jessevdk/go-flags v1.6.1
 	github.com/jpillora/backoff v1.0.0 // indirect
 	github.com/mattn/go-sqlite3 v1.14.16 // indirect
 	github.com/meatballhat/negroni-logrus v1.1.1
