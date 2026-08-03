@@ -28,7 +28,7 @@
     "@vue/cli-plugin-eslint": "^4",
     "@vue/cli-plugin-babel": "^4",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6",
+    "eslint": "^9.2.0",
     "eslint-plugin-vue": "^6",
     "less": "^3.11.3",
     "less-loader": "^5.0.0",
