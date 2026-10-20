@@ -13,7 +13,7 @@
     "axios": "^0.21.2",
     "core-js": "^3.4.4",
     "diff": "^3.4.0",
-    "element-ui": "^2.4.6",
+    "element-ui": "^2.15.14",
     "lodash.clone": "^4.5.0",
     "markdown-it": "^12.3.2",
     "vue": "^2.6.10",
