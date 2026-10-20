@@ -21,7 +21,7 @@
     "vue-router": "^2.7.0",
     "vuedraggable": "^2.14.1",
     "vuex": "^2.4.1",
-    "xss": "^1.0.9"
+    "xss": "^1.0.15"
   },
   "devDependencies": {
     "@vue/cli-service": "^4",
