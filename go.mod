@@ -20,14 +20,14 @@ require (
 	github.com/form3tech-oss/jwt-go v3.2.5+incompatible
 	github.com/getsentry/raven-go v0.2.0
 	github.com/go-openapi/analysis v0.21.4 // indirect
-	github.com/go-openapi/errors v0.20.3
+	github.com/go-openapi/errors v0.22.0
 	github.com/go-openapi/jsonreference v0.20.2 // indirect
-	github.com/go-openapi/loads v0.21.2
-	github.com/go-openapi/runtime v0.25.0
-	github.com/go-openapi/spec v0.20.8
-	github.com/go-openapi/strfmt v0.21.3
-	github.com/go-openapi/swag v0.22.3
-	github.com/go-openapi/validate v0.22.1
+	github.com/go-openapi/loads v0.22.0
+	github.com/go-openapi/runtime v0.28.0
+	github.com/go-openapi/spec v0.21.0
+	github.com/go-openapi/strfmt v0.23.0
+	github.com/go-openapi/swag v0.23.0
+	github.com/go-openapi/validate v0.24.0
 	github.com/gohttp/pprof v0.0.0-20141119085724-c9d246cbb3ba
 	github.com/jessevdk/go-flags v1.5.0
 	github.com/jpillora/backoff v1.0.0 // indirect
