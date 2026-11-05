@@ -26,7 +26,7 @@ jobs:
     steps:
       - uses: actions/setup-node@v7
         with:
-          node-version: "16"
+          node-version: "16.20.2"
       - name: Check out source code
         uses: actions/checkout@v6
       - run: cd browser/flagr-ui && npm install
